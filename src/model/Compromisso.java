@@ -6,7 +6,7 @@ import java.util.Date;
 import dto.DiaHoraDTO;
 import dto.DuracaoDTO;
 
-public class Compromisso {
+public class Compromisso implements Comparable<Compromisso> {
 	private String nome;
 	private Calendar diaHora;
 	private Date duracao;
@@ -60,5 +60,33 @@ public class Compromisso {
 		duracaoDTOTratado = Integer.toString(duracaoDTO.getHora()) + ":" + Integer.toString(duracaoDTO.getMinutos())
 				+ "m";
 		return duracaoDTOTratado;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public int compareTo(Compromisso outroCompromisso) {
+		if (this.getDiaHora().getTime().getYear() < outroCompromisso.getDiaHora().getTime().getYear()) {
+			return -1;
+		} else if (this.getDiaHora().getTime().getMonth() < outroCompromisso.getDiaHora().getTime().getMonth()) {
+			return -1;
+		} else if (this.getDiaHora().getTime().getDay() < outroCompromisso.getDiaHora().getTime().getDay()) {
+			return -1;
+		} else if (this.getDiaHora().getTime().getHours() < outroCompromisso.getDiaHora().getTime().getHours()) {
+			return -1;
+		} else if (this.getDiaHora().getTime().getMinutes() < outroCompromisso.getDiaHora().getTime().getMinutes()) {
+			return -1;
+		}
+		if (this.getDiaHora().getTime().getYear() > outroCompromisso.getDiaHora().getTime().getYear()) {
+			return 1;
+		} else if (this.getDiaHora().getTime().getMonth() > outroCompromisso.getDiaHora().getTime().getMonth()) {
+			return 1;
+		} else if (this.getDiaHora().getTime().getDay() > outroCompromisso.getDiaHora().getTime().getDay()) {
+			return 1;
+		} else if (this.getDiaHora().getTime().getHours() > outroCompromisso.getDiaHora().getTime().getHours()) {
+			return 1;
+		} else if (this.getDiaHora().getTime().getMinutes() > outroCompromisso.getDiaHora().getTime().getMinutes()) {
+			return 1;
+		}
+		return 0;
 	}
 }

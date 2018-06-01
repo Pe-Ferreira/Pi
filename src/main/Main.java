@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -24,10 +25,12 @@ public class Main {
 				salvarCompromisso(pi, sc, agenda);
 				pi.mostrarLista();
 				for (Compromisso compromissoTemp : agenda.getListaCompromisso()) {
-					String compromissoView = compromissoTemp.getNome() + " - "
-							+ compromissoTemp.tratarDiaHora(compromissoTemp.getDiaHora()) + " - "
-							+ compromissoTemp.tratarDuracao(compromissoTemp.getDuracao());
-					System.out.println(compromissoView);
+					if (compromissoTemp != null) {
+						String compromissoView = compromissoTemp.getNome() + " - "
+								+ compromissoTemp.tratarDiaHora(compromissoTemp.getDiaHora()) + " - "
+								+ compromissoTemp.tratarDuracao(compromissoTemp.getDuracao());
+						System.out.println(compromissoView);
+					}
 				}
 				pi.mostrarHorasLivres(agenda.calcularHorasLivres());
 				pi.reboot();
@@ -60,6 +63,7 @@ public class Main {
 			Date date = dateFormatDuracao.parse(stringDuracao);
 			compromisso.setDuracao(date);
 			agenda.getListaCompromisso().add(compromisso);
+			Collections.sort(agenda.getListaCompromisso());
 		} catch (Exception e) {
 			pi.casoDeErro();
 		}
